@@ -1,0 +1,17 @@
+
+
+
+My own library for code that I would use often such as a data structure for a dynamic array for any data type.
+
+in library mystruct
+
+included my implementation of a boolean (bool) type with TRUE and FALSE 
+as well as a macro function TOGGLE() to swap between true and false.
+
+uses a typedef of type int for the boolean
+
+the myinput.c file is to get the \n terminated input from the user or from a file (or will get an integer from the file or standard input.
+
+mastering can search, sort  append and find the occurrences of character in a string. 
+
+in library mylib 
