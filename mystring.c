@@ -434,7 +434,7 @@ char* trim(char* input)
 		return NULL;
 	}
 
-	temp = substring(input, start, end);
+	temp = substring(input, start, end + 1);
 
 	free(input);
 
@@ -655,7 +655,7 @@ static long int boyer_moore(const char* text, const char* search, long int offse
 		}
 	}
 
-	i = lenS - 1 - offset;					/* pos of search R end */
+	i = lenS - 1 + offset;					/* pos of search R end */
 
 	while (i < lenT)
 	{
@@ -670,7 +670,7 @@ static long int boyer_moore(const char* text, const char* search, long int offse
 		if (k == lenS)
 		{
 			free(suffix);
-			return i - k;
+			return i - k + 1;
 		}
 
 		/* figure out how much to shift by */

@@ -7,11 +7,13 @@ INCLUDE_DIR =
 MY_LIB_SRC = mystring.c myinput.c
 MY_STRUCT_LIB_SRC = ArrayList.c
 
+TEST_SRC = testing.c
 
 # lists of .o files
 MY_LIB_OBJ = $(addprefix $(BUILD_DIR), $(patsubst %.c, %.o, $(MY_LIB_SRC)))
 MY_STRUCT_LIB_OBJ = $(addprefix $(BUILD_DIR), $(patsubst %.c, %.o, $(MY_STRUCT_LIB_SRC)))
 
+TEST_OBJ = $(addprefix $(BUILD_DIR), $(patsubst %.c, %.o, $(TEST_SRC)))
 
 
 # my list of libraries
@@ -27,7 +29,8 @@ LFLAG =  $(LIBS)
 
 
 
-all:  $(LIBRARIES)
+all:  test $(LIBRARIES)
+	./test
 
 
 #**********************************
@@ -36,7 +39,7 @@ all:  $(LIBRARIES)
 #
 #**********************************
 
-test: $(TEST_OBJ) $(TEST_OBJ) $(LIBRARIES)
+test: $(TEST_OBJ)  $(LIBRARIES)
 	$(CC) $(TEST_OBJ) -o $@ $(LFLAG)
 
 
