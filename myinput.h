@@ -20,11 +20,6 @@ This file is responicble for geting and formating the users input
 #include "mystring.h"
 
 
-/* the size of the input buffer when reading input */
-#ifndef BUFFSIZE
-#define BUFFSIZE 40
-#endif
-
 /**
  * getInt
  * Gets a integer value from the users

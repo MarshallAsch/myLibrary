@@ -3,12 +3,12 @@
 
 
 
-typedef struct ArrayList
+struct ArrayList
 {
 	void** list;
 	unsigned long int length;
 	unsigned long int size;
-} ArrayList;
+};
 
 
 /**
@@ -19,7 +19,7 @@ typedef struct ArrayList
  * @return pointer to the new list on success
  *         NULL on failure
  */
-ArrayList* newArrayList();
+struct ArrayList* newArrayList();
 
 
 /**
@@ -30,7 +30,7 @@ ArrayList* newArrayList();
  * @return pointer to the new list on success
  *         NULL on failure
  */
-ArrayList* newArrayListSize(unsigned long int size);
+struct ArrayList* newArrayListSize(unsigned long int size);
 
 /**
  * destroyArrayList
@@ -47,7 +47,7 @@ ArrayList* newArrayListSize(unsigned long int size);
  *          3			If the list is NULL (frees the struct)
  *          0			On success (frees every item, list and struct)
  */
-int destroyArrayList(ArrayList* list, void (*destruct)(void* obj));
+int destroyArrayList(struct ArrayList* list, void (*destruct)(void* obj));
 
 
 
@@ -62,7 +62,7 @@ int destroyArrayList(ArrayList* list, void (*destruct)(void* obj));
  *         -2		If memory for the new list could not be allocated
  *         0		On success
  */
-int pushArray(ArrayList* list, void* element);
+int pushArray(struct ArrayList* list, void* element);
 
 
 /**
@@ -74,10 +74,10 @@ int pushArray(ArrayList* list, void* element);
  * @return 		  Pointer to the object on success
  *                NULL on failur
  */
-void* getArrayAtPos(ArrayList * list, unsigned long int index);
+void* getArrayAtPos(struct ArrayList * list, unsigned long int index);
 
 
-int sortArrayList(ArrayList * list, int (*comp)(void* a, void* b));
+int sortArrayList(struct ArrayList * list, int (*comp)(void* a, void* b));
 
 
 #endif

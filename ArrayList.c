@@ -9,6 +9,9 @@ change log
 	- March 25, 2017
 		- added prototypes for some new functions
 		- added sort function using merge sort
+
+	- March 28, 2017
+		- took away the typedef
 ****************************************************************************/
 
 
@@ -29,12 +32,12 @@ static void mergeSort(void** list, unsigned long int start, unsigned long int en
  * @return pointer to the new list on success
  *         NULL on failure
  */
-ArrayList* newArrayList()
+struct ArrayList* newArrayList()
 {
-	ArrayList* list;
+	struct ArrayList* list;
 
 	/* try allocating memory */
-	list = malloc(sizeof(ArrayList));
+	list = malloc(sizeof(struct ArrayList));
 	if (list == NULL)
 	{
 		return NULL;
@@ -55,13 +58,13 @@ ArrayList* newArrayList()
  * @return pointer to the new list on success
  *         NULL on failure
  */
-ArrayList* newArrayListSize(unsigned long int size)
+struct ArrayList* newArrayListSize(unsigned long int size)
 {
-	ArrayList* list;
+	struct ArrayList* list;
 	unsigned long int i;
 
 	/* try allocating memory */
-	list = malloc(sizeof(ArrayList));
+	list = malloc(sizeof(struct ArrayList));
 	if (list == NULL)
 	{
 		return NULL;
@@ -102,7 +105,7 @@ ArrayList* newArrayListSize(unsigned long int size)
  *          3			If the list is NULL (frees the struct)
  *          0			On success (frees every item, list and struct)
  */
-int destroyArrayList(ArrayList* list, void (*destruct)(void* obj))
+int destroyArrayList(struct ArrayList* list, void (*destruct)(void* obj))
 {
 	unsigned long int i;
 
@@ -151,7 +154,7 @@ int destroyArrayList(ArrayList* list, void (*destruct)(void* obj))
  *         -2		If memory for the new list could not be allocated
  *         0		On success
  */
-int pushArray(ArrayList* list, void* element)
+int pushArray(struct ArrayList* list, void* element)
 {
 	void** temp;
 	unsigned long int i;
@@ -196,7 +199,7 @@ int pushArray(ArrayList* list, void* element)
  * @return 		  Pointer to the object on success
  *                NULL on failur
  */
-void* getArrayAtPos(ArrayList * list, unsigned long int index)
+void* getArrayAtPos(struct ArrayList * list, unsigned long int index)
 {
 
 	/* make sure the list exists and index is in range */
@@ -209,22 +212,22 @@ void* getArrayAtPos(ArrayList * list, unsigned long int index)
 }
 
 
-int insertAfter(ArrayList * list, void* new, void* after);
+int insertAfter(struct ArrayList * list, void* new, void* after);
 
 
-int insertBefore(ArrayList* list, void* new, void* before);
+int insertBefore(struct ArrayList* list, void* new, void* before);
 
-int insertAt(ArrayList* list, void* new, long int index);
+int insertAt(struct ArrayList* list, void* new, long int index);
 
-int setElementAt(ArrayList * list, void* new, long int index);
+int setElementAt(struct ArrayList * list, void* new, long int index);
 
-long int getArrayListSize(ArrayList * list);
+long int getArrayListSize(struct ArrayList * list);
 
-long int getArrayListIndexOf(ArrayList * list, void* index);
+long int getArrayListIndexOf(struct ArrayList * list, void* index);
 
-int arrayListRemoveElement(ArrayList * list, void* element);
+int arrayListRemoveElement(struct ArrayList * list, void* element);
 
-int arrayListRemoveIndex(ArrayList * list, long int index);
+int arrayListRemoveIndex(struct ArrayList * list, long int index);
 
 
 
@@ -232,7 +235,7 @@ int arrayListRemoveIndex(ArrayList * list, long int index);
 
 
 /* wrapper for the sort function */
-int sortArrayList(ArrayList * list, int (*comp)(void* a, void* b))
+int sortArrayList(struct ArrayList * list, int (*comp)(void* a, void* b))
 {
 	if (list == NULL || list->list == NULL || comp == NULL)
 	{

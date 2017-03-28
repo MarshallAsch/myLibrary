@@ -22,7 +22,7 @@ A very basic boolean type
 
 #define TOGGLE(a) a=(a+1) %2
 
-typedef int bool;
+typedef int bool_t;
 
 #endif
 

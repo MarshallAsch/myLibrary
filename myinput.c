@@ -13,9 +13,18 @@ changeLog:
 	-March 24, 2017
 		- changed check for NULL for atio()
 
+	-March 28, 2017
+		- moved the BUFFSIZE macro into the .c file
+
+
 ****************************************************************************/
 
 #include "myinput.h"
+
+/* the size of the input buffer when reading input */
+#ifndef BUFFSIZE
+#define BUFFSIZE 40
+#endif
 
 
 /**

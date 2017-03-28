@@ -21,6 +21,8 @@ changeLog
 		- Added a string sort function uses merge sort using O(n) space
 		- I belive it is stable not inplace
 
+	-March 28, 2017
+		- removed the mybool.h
 
 ****************************************************************************/
 
@@ -33,8 +35,6 @@ changeLog
 #include <stdlib.h>
 #include <stdio.h>
 
-
-#include "myboolean.h"
 #include "mystring.h"
 
 
