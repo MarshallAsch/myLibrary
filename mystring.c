@@ -24,6 +24,10 @@ changeLog
 	-March 28, 2017
 		- removed the mybool.h
 
+	-April 5, 2017
+		- added a to upper function
+		- changed to lower to use bitwise OR instead of to lower
+
 ****************************************************************************/
 
 
@@ -49,11 +53,9 @@ static void merge(char* str, long int start, long int middle, long int end);
 /**
  * toLowerStr
  * Takes a string as input and returns a new string that is a copy
- * of the origonal but is in lowercase. if overwrite is set to TRUE (1)
- * then the origonal is freed, otherwise the caller mist free the string.
+ * of the origonal but is in lowercase. The caller mist free the string.
  *
  * IN:	str, the sring that it is going to make lowercase
- *		overwrite, wether or not the orgional gets destroyed
  * OUT: pointer to the new string on success
  *		NULL on failure
  * POST: a new string is created in memory
@@ -78,11 +80,55 @@ char* toLowerStr(const char* str)
 	/* loop through entire string */
 	for (i = 0; i < length; i++)
 	{
-		new[i] = tolower(new[i]);
+		if (new[i] >= 'A' && new[i] <= 'Z')
+		{
+			new[i] |= 32;
+		}
 	}
 
 	return new;
 }
+
+/**
+ * toUpperStr
+ * Takes a string as input and returns a new string that is a copy
+ * of the origonal but is in uppercase. The caller mist free the string.
+ *
+ * IN:	str, the sring that it is going to make uppercase
+ * OUT: pointer to the new string on success
+ *		NULL on failure
+ * POST: a new string is created in memory
+ * ERROR: NULL if the parameter is invalid or mem could not be allocated
+ */
+char* toUpperStr(const char* str)
+{
+	char * new;
+	unsigned long i;			/*   loop variable */
+	unsigned long length;
+
+	new = strduplicate(str);
+
+	/* make sure that string duplicate was successfull */
+	if (new == NULL)
+	{
+		return NULL;
+	}
+
+	length = strlen(new);
+
+	/* loop through entire string */
+	for (i = 0; i < length; i++)
+	{
+		if (new[i] >= 'a' && new[i] <= 'z')
+		{
+			new[i] &= 95;
+		}
+	}
+
+	return new;
+}
+
+
 
 /**
  * join

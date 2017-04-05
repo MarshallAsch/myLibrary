@@ -16,8 +16,7 @@ with strings
 /**
  * toLowerStr
  * Takes a string as input and returns a new string that is a copy
- * of the origonal but is in lowercase.
- * The origanal must be freed by the caller
+ * of the origonal but is in lowercase. The caller mist free the string.
  *
  * IN:	str, the sring that it is going to make lowercase
  * OUT: pointer to the new string on success
@@ -26,6 +25,19 @@ with strings
  * ERROR: NULL if the parameter is invalid or mem could not be allocated
  */
 char* toLowerStr(const char* str);
+
+/**
+ * toUpperStr
+ * Takes a string as input and returns a new string that is a copy
+ * of the origonal but is in uppercase. The caller mist free the string.
+ *
+ * IN:	str, the sring that it is going to make uppercase
+ * OUT: pointer to the new string on success
+ *		NULL on failure
+ * POST: a new string is created in memory
+ * ERROR: NULL if the parameter is invalid or mem could not be allocated
+ */
+char* toUpperStr(const char* str);
 
 /**
  * join
