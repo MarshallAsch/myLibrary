@@ -1,11 +1,12 @@
 BUILD_DIR = out/
 LIB_DIR = lib/
-INCLUDE_DIR =
+INCLUDE_DIR = .
 
 
 # lists of .c files
 MY_LIB_SRC = mystring.c myinput.c
-MY_STRUCT_LIB_SRC = ArrayList.c
+MY_STRUCT_LIB_SRC = ArrayList.c queue.c
+
 
 TEST_SRC = testing.c
 
@@ -88,6 +89,3 @@ $(LIB_DIR):
 clean:
 	rm -f -r $(BUILD_DIR)
 	rm -f -r $(LIB_DIR)
-
-
-

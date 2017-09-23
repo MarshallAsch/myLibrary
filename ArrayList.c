@@ -344,10 +344,3 @@ static void merge(void** list, unsigned long int start, unsigned long int middle
 
 	free(temp);
 }
-
-
-
-
-
-
-
