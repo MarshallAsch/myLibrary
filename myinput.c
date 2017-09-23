@@ -1,20 +1,20 @@
 /****************************** myinput.c ***********************************
-Student Name: Marshall Aaron Asch            Student Number:  0928357
-Date: February 17, 2017                   	 Course Name: CIS*2750
-Assignment: A2
+   Student Name: Marshall Aaron Asch            Student Number:  0928357
+   Date: February 17, 2017                       Course Name: CIS*2750
+   Assignment: A2
 
-This file is responicble for geting and formating the users input
-and reading from files
+   This file is responicble for geting and formating the users input
+   and reading from files
 
-changeLog:
-	- March 20, 2017
-		-changed fgetstr() to also end and return str if it reaches EOF
+   changeLog:
+        - March 20, 2017
+                -changed fgetstr() to also end and return str if it reaches EOF
 
-	-March 24, 2017
-		- changed check for NULL for atio()
+        -March 24, 2017
+                - changed check for NULL for atio()
 
-	-March 28, 2017
-		- moved the BUFFSIZE macro into the .c file
+        -March 28, 2017
+                - moved the BUFFSIZE macro into the .c file
 
 
 ****************************************************************************/
@@ -23,8 +23,8 @@ changeLog:
 
 /* the size of the input buffer when reading input */
 #ifndef BUFFSIZE
-#define BUFFSIZE 40
-#endif
+# define BUFFSIZE 40
+#endif /* ifndef BUFFSIZE */
 
 
 /**
@@ -39,23 +39,24 @@ changeLog:
  */
 int getInt()
 {
-	char* buffer;
-	int  option;
+    char *buffer;
+    int   option;
 
-	/* get the string input and convert it to an integer */
-	buffer = trim(fgetstr(stdin));
-	if (buffer != NULL)
-	{
-		option = atoi(buffer);
-	}
-	else
-	{
-		option = 0;
-	}
+    /* get the string input and convert it to an integer */
+    buffer = trim(fgetstr(stdin));
 
-	free(buffer);
+    if (buffer != NULL)
+    {
+        option = atoi(buffer);
+    }
+    else
+    {
+        option = 0;
+    }
 
-	return option;
+    free(buffer);
+
+    return option;
 }
 
 /**
@@ -68,25 +69,26 @@ int getInt()
  * POST: blocks untill the user enters input and presses enter
  * ERROR: 0 if the input is not a number
  */
-int fgetInt(FILE * stream)
+int fgetInt(FILE *stream)
 {
-	char* buffer;
-	int  num;
+    char *buffer;
+    int   num;
 
-	/* get the string input and convert it to an integer */
-	buffer = trim(fgetstr(stream));
-	if (buffer != NULL)
-	{
-		num = atoi(buffer);
-	}
-	else
-	{
-		num = 0;
-	}
+    /* get the string input and convert it to an integer */
+    buffer = trim(fgetstr(stream));
 
-	free(buffer);
+    if (buffer != NULL)
+    {
+        num = atoi(buffer);
+    }
+    else
+    {
+        num = 0;
+    }
 
-	return num;
+    free(buffer);
+
+    return num;
 }
 
 /**
@@ -101,48 +103,48 @@ int fgetInt(FILE * stream)
  * POST: reads a string untill enter is pressed
  * ERROR: NULL if memory could not be allocated
  */
-char* fgetstr(FILE * stream)
+char* fgetstr(FILE *stream)
 {
-	char buffer[BUFFSIZE + 2];
-	char* input;
-	char temp;
-	int pos;
-	int first;
+    char  buffer[BUFFSIZE + 2];
+    char *input;
+    int   temp;
+    int   pos;
+    int   first;
 
-	input = NULL;
-	pos = 0;
-	first = 0;
+    input = NULL;
+    pos   = 0;
+    first = 0;
 
-	/* get input untill EOF or /n */
-	while ((temp = fgetc(stream)))
-	{
-		/* if the user entered ctrl-D as the first character */
-		if (temp == EOF && first == 0)
-		{
-			free(input);
-			return NULL;
-		}
+    /* get input untill EOF or /n */
+    while ((temp = fgetc(stream)))
+    {
+        /* if the user entered ctrl-D as the first character */
+        if ((temp == EOF) && (first == 0))
+        {
+            free(input);
+            return NULL;
+        }
 
-		/* then flush the buffer */
-		if (pos + 1 > BUFFSIZE)
-		{
-			input = join (input, buffer);
-			pos = 0;
-		}
+        /* then flush the buffer */
+        if (pos + 1 > BUFFSIZE)
+        {
+            input = join(input, buffer);
+            pos   = 0;
+        }
 
-		buffer[pos++] = temp;
-		buffer[pos] = '\0';
+        buffer[pos++] = (char)temp;
+        buffer[pos]   = '\0';
 
-		/* if the user entered enter then end the string */
-		if (temp == '\n' || temp == EOF)
-		{
-			input = join (input, buffer);
-			break;
-		}
-		first++;
-	}
+        /* if the user entered enter then end the string */
+        if (((char)temp == '\n') || (temp == EOF))
+        {
+            input = join(input, buffer);
+            break;
+        }
+        first++;
+    }
 
-	return input;
+    return input;
 }
 
 /**
@@ -159,5 +161,5 @@ char* fgetstr(FILE * stream)
  */
 char* getstr()
 {
-	return fgetstr(stdin);
+    return fgetstr(stdin);
 }
