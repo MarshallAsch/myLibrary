@@ -2,6 +2,11 @@
 #ifndef __QUEUE_H__
 #define  __QUEUE_H__
 
+struct QueueElement {
+    struct QueueElement *prev;
+    struct QueueElement *next;
+    void                *data;
+};
 
 struct Queue
 {
@@ -18,6 +23,6 @@ int           push(struct Queue *queue,
                    void         *data);
 
 int           popBottem(struct Queue *queue,
-                        void         *data);
+                        void        **data);
 
 #endif /* ifndef __QUEUE_H__ */

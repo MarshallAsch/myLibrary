@@ -40,6 +40,8 @@ void destroy(void *data);
 int  main(void)
 {
     /* function for testing mystring.c */
+
+    printf("Starting tests...\n");
     testLower();
     testJoin();
     testJoin_char();
@@ -55,7 +57,8 @@ int  main(void)
     testsortStr();
     testQueue();
 
-    /* code */
+    printf("Done all tests.\n");
+
     return 0;
 }
 
@@ -768,44 +771,29 @@ static void testQueue()
 
     queue = newQueue();
 
-    if ((queue == NULL) || (queue->first != NULL) || (queue->last != NULL))
-    {
-        printf("FAILED 66: Queue not created properly\n");
+    if ((queue == NULL) || (queue->first != NULL) || (queue->last != NULL)) {
+        printf("FAILED 66: allocating a new queue.\n");
+    }
+
+    status = destroyQueue(queue, NULL);
+
+    if (status != 0) {
+        printf("FAILED 67: destroying the queue with NULL destroy func.\n");
     }
 
 
     status = destroyQueue(NULL, NULL);
 
-    if (status != -1)
-    {
-        printf("FAILED 67: NULL queue to destroy\n");
-    }
-
-    queue  = newQueue();
-    status = destroyQueue(queue, NULL);
-
-    if (status != 0)
-    {
-        printf("FAILED 68: NULL destroy func empty queue\n");
-    }
-
-    queue  = newQueue();
-    status = destroyQueue(queue, &free);
-
-    if (status != 0)
-    {
-        printf("FAILED 69: free() destroy func empty queue\n");
+    if (status != -1) {
+        printf("FAILED 68: destroying NULL queue with NULL destroy func.\n");
     }
 
     queue  = newQueue();
     status = destroyQueue(queue, &destroy);
 
-    if (status != 0)
-    {
-        printf("FAILED 70: free() destroy func empty queue\n");
+    if (status != 0) {
+        printf("FAILED 69: destroying empty queue with non NULL destroy func.\n");
     }
-
-    queue = newQueue();
 }
 
 void destroy(void *data)

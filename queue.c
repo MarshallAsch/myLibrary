@@ -5,11 +5,6 @@
 
 #include "queue.h"
 
-struct QueueElement {
-    struct QueueElement *prev;
-    struct QueueElement *next;
-    void                *data;
-};
 
 struct QueueElement* newQueueElement(void *data);
 
@@ -72,8 +67,7 @@ struct QueueElement* newQueueElement(void *data)
 int destroyQueue(struct Queue *queue, void (*destruct)(void *obj))
 {
     /* check if the list exists */
-    if (queue == NULL)
-    {
+    if (queue == NULL) {
         return -1;
     }
 
@@ -99,11 +93,16 @@ int destroyQueue(struct Queue *queue, void (*destruct)(void *obj))
 void destroyAll(struct QueueElement *element, void (*destruct)(void *obj))
 {
     /* then it is done */
-    if ((element == NULL) || (destruct == NULL)) {
+    if (element == NULL) {
         return;
     }
 
-    destruct(element->data);
+    /* This should not happen */
+    if (destruct == NULL) {
+        return;
+    }
+
+    (*destruct)(element->data);
     destroyAll(element->next, destruct);
     free(element);
 }
@@ -160,7 +159,7 @@ int push(struct Queue *queue, void *data)
  *              -1 if the queue does not exist
  *              -2 if the queue is empty
  */
-int popBottem(struct Queue *queue, void *data)
+int popBottem(struct Queue *queue, void **data)
 {
     struct QueueElement *temp;
 
@@ -174,8 +173,8 @@ int popBottem(struct Queue *queue, void *data)
         return -2;
     }
 
-    temp = queue->first;
-    data = temp->data;
+    temp  = queue->first;
+    *data = temp->data;
 
     queue->first = temp->next;
 

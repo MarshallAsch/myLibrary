@@ -31,26 +31,22 @@
  * getInt
  * Gets a integer value from the users
  *
- * IN:	none
+ * IN:  none
  * OUT: the number that the user enetered on success
- *		0 if the number the entered is not a valid number
+ *      0 if the number the entered is not a valid number
  * POST: blocks untill the user enters input and presses enter
  * ERROR: 0 if the input is not a number
  */
-int getInt()
-{
+int getInt() {
     char *buffer;
     int   option;
 
     /* get the string input and convert it to an integer */
     buffer = trim(fgetstr(stdin));
 
-    if (buffer != NULL)
-    {
+    if (buffer != NULL) {
         option = atoi(buffer);
-    }
-    else
-    {
+    } else {
         option = 0;
     }
 
@@ -63,26 +59,22 @@ int getInt()
  * fgetInt
  * Gets a integer value from the given stream
  *
- * IN:	stream, the stream that is being read from
+ * IN:  stream, the stream that is being read from
  * OUT: the number that the user enetered on success
- *		0 if the number the entered is not a valid number
+ *      0 if the number the entered is not a valid number
  * POST: blocks untill the user enters input and presses enter
  * ERROR: 0 if the input is not a number
  */
-int fgetInt(FILE *stream)
-{
+int fgetInt(FILE *stream) {
     char *buffer;
     int   num;
 
     /* get the string input and convert it to an integer */
     buffer = trim(fgetstr(stream));
 
-    if (buffer != NULL)
-    {
+    if (buffer != NULL) {
         num = atoi(buffer);
-    }
-    else
-    {
+    } else {
         num = 0;
     }
 
@@ -98,13 +90,12 @@ int fgetInt(FILE *stream)
  *
  * IN: stream, the stream that is being read from
  * OUT: pointer to the string on success
- *		NULL if reached EOF (or ctrl-D is pressed)
+ *      NULL if reached EOF (or ctrl-D is pressed)
  *      NULL on failure
  * POST: reads a string untill enter is pressed
  * ERROR: NULL if memory could not be allocated
  */
-char* fgetstr(FILE *stream)
-{
+char* fgetstr(FILE *stream) {
     char  buffer[BUFFSIZE + 2];
     char *input;
     int   temp;
@@ -116,18 +107,15 @@ char* fgetstr(FILE *stream)
     first = 0;
 
     /* get input untill EOF or /n */
-    while ((temp = fgetc(stream)))
-    {
+    while ((temp = fgetc(stream))) {
         /* if the user entered ctrl-D as the first character */
-        if ((temp == EOF) && (first == 0))
-        {
+        if ((temp == EOF) && (first == 0)) {
             free(input);
             return NULL;
         }
 
         /* then flush the buffer */
-        if (pos + 1 > BUFFSIZE)
-        {
+        if (pos + 1 > BUFFSIZE) {
             input = join(input, buffer);
             pos   = 0;
         }
@@ -136,8 +124,7 @@ char* fgetstr(FILE *stream)
         buffer[pos]   = '\0';
 
         /* if the user entered enter then end the string */
-        if (((char)temp == '\n') || (temp == EOF))
-        {
+        if (((char)temp == '\n') || (temp == EOF)) {
             input = join(input, buffer);
             break;
         }
@@ -152,14 +139,13 @@ char* fgetstr(FILE *stream)
  * Gets buffered input from stdin untill the user
  * enteres new line
  *
- * IN:	none
+ * IN:  none
  * OUT: pointer to the string on success
- *		NULL if reached EOF (or ctrl-D is pressed)
+ *      NULL if reached EOF (or ctrl-D is pressed)
  *      NULL on failure
  * POST: reads a string untill enter is pressed
  * ERROR: NULL if memory could not be allocated
  */
-char* getstr()
-{
+char* getstr() {
     return fgetstr(stdin);
 }
